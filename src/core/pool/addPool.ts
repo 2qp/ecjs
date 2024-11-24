@@ -3,17 +3,17 @@ import type { Pool } from "./pool";
 
 // type addPoolParams = {};
 
-type addPoolType = <T>(
+type AddPoolType = <T>(
   name: string,
   pool: Pool<T>,
   pools: Pools<T>
 ) => Pools<T>;
 
-const addPool: addPoolType = (name, pool, pools) => {
+const addPool: AddPoolType = (name, pool, pools) => {
   const updatedPools = new Map(pools).set(name, pool);
 
   return updatedPools;
 };
 
 export { addPool };
-export type { addPoolType };
+export type { AddPoolType };
