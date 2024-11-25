@@ -1,6 +1,6 @@
 import type { Pools } from "../pools/pools";
 
-type System<T> = {
+type SystemBase<T> = {
   update: (pools: Pools<T>, delta: number) => void | Promise<void>;
   priority?: number;
   initialize?: () => void | Promise<void>;
@@ -8,4 +8,6 @@ type System<T> = {
   cleanup?: () => void | Promise<void>;
 };
 
-export type { System };
+type System<T extends SystemBase<T>> = T;
+
+export type { System, SystemBase };
