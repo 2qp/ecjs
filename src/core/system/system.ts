@@ -1,13 +1,13 @@
 import type { Pools } from "../pools/pools";
 
-type SystemBase<T> = {
-  update: (pools: Pools<T>, delta: number) => void | Promise<void>;
+type SystemBase<TPools> = {
+  update: (pools: Pools<TPools>, delta: number) => void | Promise<void>;
   priority?: number;
   initialize?: () => void | Promise<void>;
   initialized?: boolean;
   cleanup?: () => void | Promise<void>;
 };
 
-type System<T extends SystemBase<T>> = T;
+type System<TSystem extends SystemBase<TPools>, TPools> = TSystem;
 
 export type { System, SystemBase };
