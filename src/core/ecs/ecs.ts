@@ -3,17 +3,22 @@ import type { EntityBase } from "../entity/entity";
 import type { Pools } from "../pools/pools";
 import type { System, SystemBase } from "../system/system";
 
-type ECSBase<T extends SystemBase<T>, U extends EntityBase> = {
-  entities: Entities<U>;
-  pools: Pools<T>;
-  systems: System<T>[];
+type ECSBase<
+  TPools,
+  TSystem extends SystemBase<TPools>,
+  TEntity extends EntityBase
+> = {
+  entities: Entities<TEntity>;
+  pools: Pools<TPools>;
+  systems: System<TSystem, TPools>[];
   initialized: boolean | null;
 };
 
 type ECS<
-  T extends ECSBase<U, V>,
-  U extends SystemBase<U>,
-  V extends EntityBase
-> = T;
+  TECS extends ECSBase<TPools, TSystem, TEntity>,
+  TSystem extends SystemBase<TPools>,
+  TEntity extends EntityBase,
+  TPools
+> = TECS;
 
 export type { ECS };
