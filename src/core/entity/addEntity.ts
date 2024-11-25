@@ -1,13 +1,13 @@
 import type { Entities } from "./entities";
-import type { Entity } from "./entity";
+import type { Entity, EntityBase } from "./entity";
 
 // type AddEntityParams = {};
 
-type AddEntityType = (
+type AddEntityType = <T extends EntityBase>(
   eid: number,
-  entity: Entity,
-  entities: Entities
-) => Entities;
+  entity: Entity<T>,
+  entities: Entities<T>
+) => Entities<T>;
 
 const addEntity: AddEntityType = (eid, entity, entities) => {
   const updatedEntities = new Map(entities).set(eid, entity);

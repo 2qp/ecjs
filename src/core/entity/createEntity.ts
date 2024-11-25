@@ -1,13 +1,10 @@
-import type { Entity } from "./entity";
+import type { Entity, EntityBase } from "./entity";
 
 // type CreateEntityParams = {};
 
-type CreateEntityType = (eid: number, components: string[]) => Entity;
+type CreateEntityType = <T extends EntityBase>(props: Entity<T>) => Entity<T>;
 
-const createEntity: CreateEntityType = (eid, components) => ({
-  id: eid,
-  pools: new Set(components),
-});
+const createEntity: CreateEntityType = (props) => props;
 
 export { createEntity };
 export type { CreateEntityType };

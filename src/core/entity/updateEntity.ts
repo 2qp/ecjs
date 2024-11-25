@@ -1,12 +1,12 @@
-import type { Entity } from "./entity";
+import type { Entity, EntityBase } from "./entity";
 
 // type UpdateEntityParams = {};
 
-type UpdateEntityType = (
+type UpdateEntityType = <T extends EntityBase>(
   components: string[],
-  entity: Entity,
+  entity: Entity<T>,
   remove?: string[]
-) => Entity;
+) => Entity<T>;
 
 const updateEntity: UpdateEntityType = (components, entity, remove) => {
   const removeSet = remove ? new Set(remove) : new Set();
@@ -20,6 +20,7 @@ const updateEntity: UpdateEntityType = (components, entity, remove) => {
   const pools = new Set(filteredPools);
 
   return {
+    ...entity,
     id: entity.id,
     pools,
   };

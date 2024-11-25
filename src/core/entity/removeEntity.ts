@@ -1,8 +1,12 @@
 import type { Entities } from "./entities";
+import type { EntityBase } from "./entity";
 
 // type RemoveEntityParams = {};
 
-type RemoveEntityType = (eid: number, entities: Entities) => Entities;
+type RemoveEntityType = <T extends EntityBase>(
+  eid: number,
+  entities: Entities<T>
+) => Entities<T>;
 
 const removeEntity: RemoveEntityType = (eid, entities) => {
   //
