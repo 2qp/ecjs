@@ -3,9 +3,12 @@
  *
  * making the `Entity` more readable (e.g., for JSON or API).
  */
-type Entity = {
+
+type EntityBase = {
   id: number;
   pools: Set<string>;
 };
 
-export type { Entity };
+type Entity<T extends EntityBase> = T;
+
+export type { Entity, EntityBase };
