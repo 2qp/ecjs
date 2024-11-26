@@ -2,6 +2,9 @@
   "name": "ecjs",
   "private": true,
   "version": "0.0.0",
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -27,5 +30,20 @@
     "typescript-eslint": "^8.11.0",
     "vite": "^5.4.10",
     "vite-plugin-dts": "^4.3.0"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/ecjs.es.js",
+      "require": "./dist/ecjs.umd.cjs"
+    },
+    "./component": {
+      "import": "./dist/component.d.ts",
+      "require": "./dist/component.js"
+    },
+    "./entity": {
+      "import": "./dist/entity.d.ts",
+      "require": "./dist/entity.js"
+    }
   }
 }
