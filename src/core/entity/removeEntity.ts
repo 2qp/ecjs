@@ -1,4 +1,4 @@
-import type { Entities } from "./entities";
+import type { Entities } from "../entities/entities";
 import type { EntityBase } from "./entity";
 
 // type RemoveEntityParams = {};

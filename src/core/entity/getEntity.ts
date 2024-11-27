@@ -1,4 +1,4 @@
-import type { Entities } from "./entities";
+import type { Entities } from "../entities/entities";
 import type { Entity, EntityBase } from "./entity";
 
 // type GetEntityParams = {};
