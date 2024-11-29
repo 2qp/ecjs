@@ -9,6 +9,6 @@ type EntityBase = {
   pools: Set<string>;
 };
 
-type Entity<T extends EntityBase> = T;
+type Entity<TEntity extends EntityBase = EntityBase> = TEntity;
 
 export type { Entity, EntityBase };
