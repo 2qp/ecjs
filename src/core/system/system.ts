@@ -8,6 +8,9 @@ type SystemBase<TPools> = {
   cleanup?: () => void | Promise<void>;
 };
 
-type System<TSystem extends SystemBase<TPools>, TPools> = TSystem;
+type System<
+  TPools,
+  TSystem extends SystemBase<TPools> = SystemBase<TPools>
+> = TSystem;
 
 export type { System, SystemBase };
