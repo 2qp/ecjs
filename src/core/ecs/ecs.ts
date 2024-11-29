@@ -1,4 +1,4 @@
-import type { Entities } from "../entity/entities";
+import type { Entities } from "../entities/entities";
 import type { EntityBase } from "../entity/entity";
 import type { Pools } from "../pools/pools";
 import type { System, SystemBase } from "../system/system";
@@ -10,15 +10,19 @@ type ECSBase<
 > = {
   entities: Entities<TEntity>;
   pools: Pools<TPools>;
-  systems: System<TSystem, TPools>[];
+  systems: System<TPools, TSystem>[];
   initialized: boolean | null;
 };
 
 type ECS<
-  TECS extends ECSBase<TPools, TSystem, TEntity>,
-  TSystem extends SystemBase<TPools>,
-  TEntity extends EntityBase,
-  TPools
+  TPools,
+  TSystems extends SystemBase<TPools>,
+  TEntities extends EntityBase,
+  TECS extends ECSBase<TPools, TSystems, TEntities> = ECSBase<
+    TPools,
+    TSystems,
+    TEntities
+  >
 > = TECS;
 
-export type { ECS };
+export type { ECS, ECSBase };
