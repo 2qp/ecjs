@@ -1,15 +1,13 @@
 /// <reference types="vite/client" />
 
-import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
     dts({
-      tsconfigPath: "./tsconfig.app.json",
+      tsconfigPath: "./tsconfig.json",
       insertTypesEntry: true,
       outDir: "dist",
     }),
@@ -27,18 +25,6 @@ export default defineConfig({
       },
       formats: ["es", "cjs"],
       name: "ecjs",
-    },
-
-    rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime"],
-
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "React-dom",
-          "react/jsx-runtime": "react/jsx-runtime",
-        },
-      },
     },
   },
 });
