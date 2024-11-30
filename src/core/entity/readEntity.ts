@@ -1,9 +1,9 @@
-import type { Entity, EntityBase } from "./entity";
+import type { Entity } from "./entity";
 import type { ReadableEntity } from "./readable-entity";
 
 // type ReadEntityParams = {};
 
-type ReadEntityType = <T extends EntityBase>(
+type ReadEntityType = <T extends Entity>(
   eid: number,
   entity: Entity<T> | undefined
 ) => ReadableEntity<T> | undefined;

@@ -1,9 +1,9 @@
 import type { Entities } from "../entities/entities";
-import type { EntityBase } from "./entity";
+import type { Entity } from "./entity";
 
 // type RemoveEntityParams = {};
 
-type RemoveEntityType = <T extends EntityBase>(
+type RemoveEntityType = <T extends Entity>(
   eid: number,
   entities: Entities<T>
 ) => Entities<T>;

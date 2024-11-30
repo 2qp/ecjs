@@ -1,9 +1,9 @@
 import type { Entities } from "../entities/entities";
-import type { Entity, EntityBase } from "./entity";
+import type { Entity } from "./entity";
 
 // type GetEntityParams = {};
 
-type GetEntityType = <T extends EntityBase>(
+type GetEntityType = <T extends Entity>(
   eid: number,
   entities: Entities<T>
 ) => Entity<T> | undefined;

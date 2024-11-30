@@ -1,8 +1,8 @@
-import type { Entity, EntityBase } from "./entity";
+import type { Entity } from "./entity";
 
 // type UpdateEntityParams = {};
 
-type UpdateEntityType = <T extends EntityBase>(
+type UpdateEntityType = <T extends Entity>(
   components: string[],
   entity: Entity<T>,
   remove?: string[]

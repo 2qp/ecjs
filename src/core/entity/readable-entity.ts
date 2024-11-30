@@ -1,6 +1,6 @@
-import type { Entity, EntityBase } from "./entity";
+import type { Entity } from "./entity";
 
-type ReadableEntity<T extends EntityBase> = Omit<Entity<T>, "pools"> & {
+type ReadableEntity<T extends Entity> = Omit<Entity<T>, "pools"> & {
   pools: string[];
 };
 
