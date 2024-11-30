@@ -1,16 +1,16 @@
 import type { Pools } from "../pools/pools";
 
-type SystemBase<TPools> = {
-  update: (pools: Pools<TPools>, delta: number) => void | Promise<void>;
+type SystemBase<TPool> = {
+  update: (pools: Pools<TPool>, delta: number) => void | Promise<void>;
   priority?: number;
-  initialize?: () => void | Promise<void>;
+  initialize?: (pools: Pools<TPool>, delta: number) => void | Promise<void>;
   initialized?: boolean;
   cleanup?: () => void | Promise<void>;
 };
 
 type System<
-  TPools,
-  TSystem extends SystemBase<TPools> = SystemBase<TPools>
+  TPool,
+  TSystem extends SystemBase<TPool> = SystemBase<TPool>
 > = TSystem;
 
 export type { System, SystemBase };
