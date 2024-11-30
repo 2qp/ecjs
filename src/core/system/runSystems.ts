@@ -1,21 +1,33 @@
 import type { Pools } from "../pools/pools";
-import type { System, SystemBase } from "./system";
+import type { System } from "./system";
 
 // type RunSystemsParams = {};
 
-type RunSystemsType = <T, U extends SystemBase<T>>(
+type RunSystemsType = <T extends System<T>, U extends System<T>>(
   pools: Pools<T>,
-  systems: System<U, T>[],
+  systems: System<T, U>[],
   delta: number
-) => Pools<T>;
+) => Pools<T> | Promise<Pools<T>>;
 
-const runSystems: RunSystemsType = (pools, systems, delta) => {
+/**
+ * sequential processing
+ * @param pools
+ * @param systems
+ * @param delta
+ * @returns
+ */
+const runSystems: RunSystemsType = async (pools, systems, delta) => {
   const updatedPools = new Map(pools);
 
   for (let i = 0, len = systems.length; i < len; i++) {
     const system = systems[i];
-    system.initialize?.();
-    system.update(updatedPools, delta);
+
+    if (system.initialized || system.initialize) {
+      await system.initialize?.(updatedPools, delta);
+      system.initialized = true;
+    }
+
+    await system.update(updatedPools, delta);
   }
 
   return updatedPools;
