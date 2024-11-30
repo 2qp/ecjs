@@ -1,26 +1,26 @@
-import type { EntityBase } from "../entity/entity";
-import type { SystemBase } from "../system";
-import type { ECS, ECSBase } from "./ecs";
+import type { Entity } from "../entity/entity";
+import type { System } from "../system";
+import type { ECS } from "./ecs";
 
 type CreateECSParams<
-  TECS extends ECSBase<TPools, TSystems, TEntities>,
-  TPools,
-  TEntities extends EntityBase,
-  TSystems extends SystemBase<TPools>
-> = {} & ECS<TPools, TSystems, TEntities, TECS>;
+  TPool,
+  TEntity extends Entity,
+  TSystem extends System<TPool>,
+  TECS extends ECS<TPool, TEntity, TSystem>
+> = {} & ECS<TPool, TEntity, TSystem, TECS>;
 
 type CreateECSType = <
-  TPools,
-  TEntities extends EntityBase = EntityBase,
-  TSystems extends SystemBase<TPools> = SystemBase<TPools>,
-  TECS extends ECSBase<TPools, TSystems, TEntities> = ECSBase<
-    TPools,
-    TSystems,
-    TEntities
+  TPool,
+  TEntity extends Entity = Entity,
+  TSystem extends System<TPool> = System<TPool>,
+  TECS extends ECS<TPool, TEntity, TSystem> = ECS<
+    TPool,
+    TEntity,
+    TSystem
   >
 >(
-  params: CreateECSParams<TECS, TPools, TEntities, TSystems>
-) => ECS<TPools, TSystems, TEntities, TECS>;
+  params: CreateECSParams<TPool, TEntity, TSystem, TECS>
+) => ECS<TPool, TEntity, TSystem, TECS>;
 
 const createECS: CreateECSType = (props) => props;
 
