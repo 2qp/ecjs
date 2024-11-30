@@ -21,6 +21,11 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
+
+    //
+    rules: {
+      "@typescript-eslint/consistent-type-definitions": "off",
+    },
   },
   { ignores: ["dist"] }
 );
