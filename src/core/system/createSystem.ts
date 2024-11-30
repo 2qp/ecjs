@@ -1,13 +1,13 @@
-import type { System, SystemBase } from "./system";
+import type { System } from "./system";
 
-type CreateSystemParams<
-  TSystem extends SystemBase<TPools>,
-  TPools
-> = {} & System<TSystem, TPools>;
+type CreateSystemParams<TSystem extends System<TPool>, TPool> = {} & System<
+  TPool,
+  TSystem
+>;
 
-type CreateSystemType = <TSystem extends SystemBase<TPools>, TPools>(
-  params: CreateSystemParams<TSystem, TPools>
-) => System<TSystem, TPools>;
+type CreateSystemType = <TPool, TSystem extends System<TPool> = System<TPool>>(
+  params: CreateSystemParams<TSystem, TPool>
+) => System<TPool, TSystem>;
 
 const createSystem: CreateSystemType = (params) => params;
 

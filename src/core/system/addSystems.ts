@@ -1,11 +1,11 @@
-import type { System, SystemBase } from "./system";
+import type { System } from "./system";
 
 // type AddSystemsParams = {};
 
-type AddSystemsType = <T extends SystemBase<U>, U>(
-  system: System<T, U>[],
-  systems: System<T, U>[]
-) => System<T, U>[];
+type AddSystemsType = <TPool, TSystem extends System<TPool> = System<TPool>>(
+  system: System<TPool, TSystem>[],
+  systems: System<TPool, TSystem>[]
+) => System<TPool, TSystem>[];
 
 const addSystems: AddSystemsType = (system, systems) => [...systems, ...system];
 
