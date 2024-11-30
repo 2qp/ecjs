@@ -1,7 +1,7 @@
 import type { Pools } from "../pools";
 import type { System } from "./system";
 
-type RunSystemsWithConcurrencyControlParams = {};
+// type RunSystemsWithConcurrencyControlParams = {};
 
 type RunSystemsWithConcurrencyControlType = <
   TPool extends System<TPool>,
@@ -48,7 +48,4 @@ const runSystemsWithConcurrencyControl: RunSystemsWithConcurrencyControlType =
 
 export { runSystemsWithConcurrencyControl };
 
-export type {
-  RunSystemsWithConcurrencyControlParams,
-  RunSystemsWithConcurrencyControlType,
-};
+export type { RunSystemsWithConcurrencyControlType };
