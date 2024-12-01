@@ -3,11 +3,11 @@ import type { System } from "./system";
 
 // type RunSystemsParams = {};
 
-type RunSystemsType = <T extends System<T>, U extends System<T>>(
-  pools: Pools<T>,
-  systems: System<T, U>[],
+type RunSystemsType = <TPool, TSystem extends System<TPool> = System<TPool>>(
+  pools: Pools<TPool>,
+  systems: System<TPool, TSystem>[],
   delta: number
-) => Pools<T> | Promise<Pools<T>>;
+) => Pools<TPool>;
 
 /**
  * sequential processing
@@ -16,18 +16,18 @@ type RunSystemsType = <T extends System<T>, U extends System<T>>(
  * @param delta
  * @returns
  */
-const runSystems: RunSystemsType = async (pools, systems, delta) => {
+const runSystems: RunSystemsType = (pools, systems, delta) => {
   const updatedPools = new Map(pools);
 
   for (let i = 0, len = systems.length; i < len; i++) {
     const system = systems[i];
 
     if (system.initialized || system.initialize) {
-      await system.initialize?.(updatedPools, delta);
+      system.initialize?.(updatedPools, delta);
       system.initialized = true;
     }
 
-    await system.update(updatedPools, delta);
+    system.update(updatedPools, delta);
   }
 
   return updatedPools;
