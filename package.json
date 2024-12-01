@@ -19,5 +19,47 @@
     "typescript-eslint": "^8.16.0",
     "vite": "^6.0.1",
     "vite-plugin-dts": "^4.3.0"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/ecjs.js",
+      "require": "./dist/ecjs.cjs"
+    },
+    "./component": {
+      "types": "./dist/component.d.ts",
+      "require": "./dist/component.js",
+      "import": "./dist/component.js"
+    },
+    "./ecs": {
+      "types": "./dist/ecs.d.ts",
+      "require": "./dist/ecs.js",
+      "import": "./dist/ecs.js"
+    },
+    "./entities": {
+      "types": "./dist/entities.d.ts",
+      "require": "./dist/entities.js",
+      "import": "./dist/entities.js"
+    },
+    "./entity": {
+      "types": "./dist/entity.d.ts",
+      "require": "./dist/entity.js",
+      "import": "./dist/entity.js"
+    },
+    "./pool": {
+      "types": "./dist/pool.d.ts",
+      "require": "./dist/pool.js",
+      "import": "./dist/pool.js"
+    },
+    "./pools": {
+      "types": "./dist/pools.d.ts",
+      "require": "./dist/pools.js",
+      "import": "./dist/pools.js"
+    },
+    "./system": {
+      "types": "./dist/system.d.ts",
+      "require": "./dist/system.js",
+      "import": "./dist/system.js"
+    }
   }
 }
