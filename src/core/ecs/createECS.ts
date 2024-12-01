@@ -13,11 +13,7 @@ type CreateECSType = <
   TPool,
   TEntity extends Entity = Entity,
   TSystem extends System<TPool> = System<TPool>,
-  TECS extends ECS<TPool, TEntity, TSystem> = ECS<
-    TPool,
-    TEntity,
-    TSystem
-  >
+  TECS extends ECS<TPool, TEntity, TSystem> = ECS<TPool, TEntity, TSystem>
 >(
   params: CreateECSParams<TPool, TEntity, TSystem, TECS>
 ) => ECS<TPool, TEntity, TSystem, TECS>;
