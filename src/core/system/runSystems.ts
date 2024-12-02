@@ -7,30 +7,38 @@ type RunSystemsType = <TPool, TSystem extends System<TPool> = System<TPool>>(
   pools: Pools<TPool>,
   systems: System<TPool, TSystem>[],
   delta: number
-) => Pools<TPool>;
+) => Generator<Pools<TPool>>;
 
 /**
- * sequential processing
+ * sequential yielding
  * @param pools
  * @param systems
  * @param delta
  * @returns
  */
 const runSystems: RunSystemsType = (pools, systems, delta) => {
-  const updatedPools = new Map(pools);
+  const length = systems.length;
 
-  for (let i = 0, len = systems.length; i < len; i++) {
-    const system = systems[i];
+  function* generator() {
+    for (let i = 0, len = length; i < len; i++) {
+      const system = systems[i];
 
-    if (system.initialized || system.initialize) {
-      system.initialize?.(updatedPools, delta);
-      system.initialized = true;
+      if (!system.enabled) continue;
+
+      if (!system.initialized && system.initialize) {
+        const initializedPools = system.initialize(pools, delta);
+        system.initialized = true;
+
+        const updatedPools = system.update(initializedPools, delta);
+        yield updatedPools;
+        continue;
+      }
+
+      const updatedPools = system.update(pools, delta);
+      yield updatedPools;
     }
-
-    system.update(updatedPools, delta);
   }
-
-  return updatedPools;
+  return generator();
 };
 
 export { runSystems };
