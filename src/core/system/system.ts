@@ -1,10 +1,12 @@
 import type { Pools } from "../pools/pools";
 
 type SystemBase<TPool> = {
-  update: (pools: Pools<TPool>, delta: number) => void;
+  enabled: boolean;
   priority?: number;
-  initialize?: (pools: Pools<TPool>, delta: number) => void;
   initialized?: boolean;
+
+  initialize?: (pools: Pools<TPool>, delta: number) => Pools<TPool>;
+  update: (pools: Pools<TPool>, delta: number) => Pools<TPool>;
   cleanup?: () => void;
 };
 
@@ -14,3 +16,5 @@ type System<
 > = TSystem;
 
 export type { System, SystemBase };
+
+const cc: SystemBase<any> = {};
