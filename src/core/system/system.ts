@@ -16,5 +16,3 @@ type System<
 > = TSystem;
 
 export type { System, SystemBase };
-
-const cc: SystemBase<any> = {};
