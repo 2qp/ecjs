@@ -20,7 +20,7 @@ const runSystems: RunSystemsType = (pools, systems, delta) => {
   const length = systems.length;
 
   function* generator() {
-    for (let i = 0, len = length; i < len; i++) {
+    for (let i = 0; i < length; i++) {
       const system = systems[i];
 
       if (!system.enabled) continue;
