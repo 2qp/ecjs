@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "tsc && vite build --watch",
     "build": "tsc && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
