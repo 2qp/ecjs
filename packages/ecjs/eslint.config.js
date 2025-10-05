@@ -1,31 +1,24 @@
-// @ts-check
+import { config as baseConfig } from "@repo/eslint-config/base";
 
-import js from "@eslint/js";
-import tseslint from "typescript-eslint";
-
-export default tseslint.config(
+/**
+ * @type {import("eslint").Linter.Config[]}
+ */
+export default [
   {
-    extends: [
-      js.configs.recommended,
-
-      ...tseslint.configs.strictTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked,
-    ],
-    // files: ["**/*.{ts,tsx}"],
+    ignores: ["eslint.config.js"],
+  },
+  ...baseConfig,
+  {
+    files: ["**/*.{ts,tsx}"],
     languageOptions: {
-      ecmaVersion: 2020,
       parserOptions: {
         project: "./tsconfig.json",
-        ecmaVersion: 2020,
-        sourceType: "module",
         tsconfigRootDir: import.meta.dirname,
       },
     },
-
-    //
     rules: {
-      "@typescript-eslint/consistent-type-definitions": "off",
+      // "@typescript-eslint/consistent-type-definitions": "off",
+      "no-unused-vars": "off",
     },
   },
-  { ignores: ["dist"] }
-);
+];
