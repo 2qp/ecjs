@@ -23,6 +23,7 @@ const runSystems: RunSystemsType = (pools, systems, delta) => {
     for (let i = 0; i < length; i++) {
       const system = systems[i];
 
+      if (!system) continue;
       if (!system.enabled) continue;
 
       if (!system.initialized && system.initialize) {
